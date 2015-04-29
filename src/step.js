@@ -1,0 +1,37 @@
+var React = require('react');
+
+var Step = React.createClass({
+  getInitialState: function() {
+    return {};
+  },
+
+  getDefaultProps: function() {
+    return {
+      description: null,
+    };
+  },
+
+  propTypes: {
+    title: React.PropTypes.string.isRequired,
+    description: React.PropTypes.string,
+  },
+
+
+  render: function () {
+    var description = null;
+
+    if(this.props.description) {
+      description = <p className="sw-description">{this.props.description}</p>
+    }
+
+    return (
+      <div className="sw-step">
+        <h1 className="sw-title">{this.props.title}</h1>
+        {description}
+        {this.props.children}
+      </div>
+    );
+  },
+});
+
+module.exports = Step;
