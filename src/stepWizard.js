@@ -3,6 +3,8 @@ var Step = require('./step.js');
 var NavigationButton = require('./components/navigationButton.js');
 var NavigationBeads = require('./components/navigationBeads.js');
 
+require('../styles/stepWizardStyles.css');
+
 
 var StepWizard = React.createClass({
   statics: {
