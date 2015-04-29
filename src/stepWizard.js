@@ -26,7 +26,17 @@ var StepWizard = React.createClass({
   },
 
   validateChildren: function() {
-    //later
+    React.Children.forEach(this.props.children, function(child) {
+      var type = child.type;
+
+      if(typeof type !== "string") {
+        type = type.displayName;
+      }
+
+      if(type !== "Step") {
+        throw new Error(type + " is not a Step component");
+      }
+    });
   },
 
 
