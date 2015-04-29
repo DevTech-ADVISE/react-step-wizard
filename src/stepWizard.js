@@ -37,6 +37,12 @@ var StepWizard = React.createClass({
         throw new Error(type + " is not a Step component");
       }
     });
+
+    var childrenCount = React.Children.count(this.props.children);
+
+    if(childrenCount <= 1) {
+      throw new Error("You must supply more than 1 Step child");
+    }
   },
 
 
