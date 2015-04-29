@@ -1,0 +1,38 @@
+.sw-navigation {
+    position: absolute;
+    width: 100%;
+}
+
+.sw-button {
+    border: 1px black solid;
+    position: absolute;
+    top: 0;
+}
+
+.sw-button-full {
+    left: 0%;
+    width: 100%;
+}
+
+.sw-button-left {
+    left: 0%;
+    width: 50%;
+}
+
+.sw-button-right {
+    left: 50%;
+    width: 50%;
+}
+
+.sw-step {
+    position: relative;
+    left: 10%;
+    width: 80%;
+    margin: 20px;
+}
+.sw-beads {
+    position: relative;
+    text-align: center;
+    left: 10%;
+    width: 80%;
+}

@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/YeahButHats/react-step-wizard",
   "dependencies": {
+    "classnames": "^1.2.2",
     "css-loader": "^0.9.1",
     "jsx-loader": "^0.12.2",
     "react": "^0.13.2",
