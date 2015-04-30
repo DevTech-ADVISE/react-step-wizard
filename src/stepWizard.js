@@ -1,5 +1,9 @@
 var react = require('react');
 var Step = require('./step.js');
+var NavigationButton = require('./components/navigationButton.js');
+var NavigationBeads = require('./components/navigationBeads.js');
+
+require('../styles/stepWizardStyles.css');
 
 
 var StepWizard = React.createClass({
@@ -77,30 +81,81 @@ var StepWizard = React.createClass({
     this.setState({currentStepIndex: stepIndex});
   },
 
+  getStepData: function(step, index) {
+    return {
+      title: step.props.title,
+      description: step.props.description,
+      index: index,
+      isCurrent: index === this.state.currentStepIndex,
+    };
+  },
+
   getBeads: function() {
-    var beads = this.props.children.map(function(child, index) {
-      if(index === this.state.currentStepIndex) {
-        return "X";
-      }
+    var childrenData = this.props.children.map(this.getStepData, this);
 
-      return "O";
-    }, this);
+    return (
+      <NavigationBeads stepData={childrenData} />
+    );
+  },
 
-    return (<div className="sw-beads">{beads.join("---")}</div>);
+  getStepDataAt: function(index) {
+    var minIndex = 0;
+    var maxIndex = React.Children.count(this.props.children) - 1;
+
+    if(index < minIndex || index > maxIndex) {
+      return null;
+    }
+
+    var step = this.props.children[index];
+
+    return this.getStepData(step, index);
+  },
+
+  makeNavButton: function(buttonData, onClick, className) {
+    return (
+      <NavigationButton
+        stepData={buttonData}
+        onClick={onClick}
+        className={className}/>
+    )
+  },
+
+  getNavigation: function() {
+    var index = this.state.currentStepIndex;
+
+    var prevStepData = this.getStepDataAt(index - 1);
+    var nextStepData = this.getStepDataAt(index + 1);
+
+    var prevButton = null;
+    var nextButton = null;
+
+    if(prevStepData === null) {
+      nextButton = this.makeNavButton(nextStepData, this.onClickNext, "sw-button-full");
+    } else if(nextStepData === null) {
+      prevButton = this.makeNavButton(prevStepData, this.onClickPrev, "sw-button-full");
+    } else {
+      prevButton = this.makeNavButton(prevStepData, this.onClickPrev, "sw-button-left");
+      nextButton = this.makeNavButton(nextStepData, this.onClickNext, "sw-button-right");
+    }
+
+    return (
+      <div className="sw-navigation">
+        {prevButton}
+        {nextButton}
+      </div>
+    );
   },
 
   render: function () {
     var beads = this.getBeads();
     var currentStep = this.props.children[this.state.currentStepIndex];
+    var navigation = this.getNavigation();
 
     return (
       <div className="sw-container">
         {beads}
         {currentStep}
-        <div className="sw-navigation">
-          <input type="button" value="Previous" onClick={this.onClickPrev}/>
-          <input type="button" value="Next" onClick={this.onClickNext}/>
-        </div>
+        {navigation}
       </div>
     );
   },

@@ -39,10 +39,25 @@ Step Wizard is comprised of two components: StepWizard (the main component) and 
 ## CSS Information ##
 
     <div class="sw-container">
+      <div class="sw-beads"/>
       <div class="sw-step">
         <h1 class="sw-title" />
         <p class="sw-description" /> <!-- only if included -->
         <!-- Content Goes Here -->
       </div>
-      <!-- repeat steps as above -->
+      
+      <div class="sw-navigation">
+        <!-- See "Buttons" below -->
+      </div>
     </div>
+
+### Buttons ###
+
+If the step is the first or last, there will only be one button:
+
+    <div class="sw-button sw-button-full"/>
+
+Otherwise, there will be two buttons:
+
+    <div class="sw-button sw-button-left"/>
+    <div class="sw-button sw-button-right"/>
