@@ -1,7 +1,8 @@
-var react = require('react');
+var React = require('react');
 var Step = require('./step.js');
 var NavigationButton = require('./components/navigationButton.js');
 var NavigationBeads = require('./components/navigationBeads.js');
+var classNames = require('classnames');
 
 require('../styles/stepWizardStyles.css');
 
@@ -23,6 +24,10 @@ var StepWizard = React.createClass({
 
   propTypes: {
 
+  },
+
+  consts: {
+    hideableClass: "sw-hidable",
   },
 
   componentWillMount: function() {
@@ -66,6 +71,25 @@ var StepWizard = React.createClass({
     this.moveToPage(stepIndex);
   },
 
+  executeStepCallbacks: function(start, end) {
+    //I hate javascript scoping warnings
+    var i, child;
+
+    if(start < end) {
+      for(i = start; i < end; i++) {
+        child = this.props.children[i];
+
+        child.props.onNext(i);
+      }
+    } else if (start > end) {
+      for(i = start; i > end; i--) {
+        child = this.props.children[i];
+
+        child.props.onPrevious(i);
+      }
+    }
+  },
+
   moveToPage: function(stepIndex) {
     var minIndex = 0;
     var maxIndex = React.Children.count(this.props.children) - 1;
@@ -77,6 +101,8 @@ var StepWizard = React.createClass({
       console.warn("stepIndex was " + stepIndex + ", greater than minIndex of " + minIndex + ". Setting stepIndex to " + minIndex + ".");
       stepIndex = minIndex;
     }
+
+    this.executeStepCallbacks(this.state.currentStepIndex, stepIndex);
 
     this.setState({currentStepIndex: stepIndex});
   },
@@ -94,7 +120,10 @@ var StepWizard = React.createClass({
     var childrenData = this.props.children.map(this.getStepData, this);
 
     return (
-      <NavigationBeads stepData={childrenData} />
+      <NavigationBeads
+        stepData={childrenData} 
+        selectedIndex={this.state.currentStepIndex}
+        onClick={this.moveToPage}/>
     );
   },
 
@@ -121,7 +150,20 @@ var StepWizard = React.createClass({
   },
 
   getNavigation: function() {
-    var index = this.state.currentStepIndex;
+    var currentIndex = 0;
+    var maxIndex = React.Children.count(this.props.children) - 1;
+
+    var navigation = [];
+
+    do {
+      navigation.push(this.getNavigationAt(currentIndex));
+    } while(currentIndex++ < maxIndex);
+
+    return navigation;
+  },
+
+  getNavigationAt: function(index) {
+    var currentIndex = this.state.currentStepIndex;
 
     var prevStepData = this.getStepDataAt(index - 1);
     var nextStepData = this.getStepDataAt(index + 1);
@@ -138,23 +180,53 @@ var StepWizard = React.createClass({
       nextButton = this.makeNavButton(nextStepData, this.onClickNext, "sw-button-right");
     }
 
+    var classes = 
+      classNames("sw-navigation", 
+        this.consts.hideableClass, 
+        {"sw-active": currentIndex === index}
+      );
+
     return (
-      <div className="sw-navigation">
+      <div className={classes} key={index}>
         {prevButton}
         {nextButton}
       </div>
     );
   },
 
+  getPages: function() {
+    var currentIndex = this.state.currentStepIndex;
+
+    return this.props.children.map(function(child, index) {
+      var classes = classNames(
+        child.props.classNames, 
+        this.consts.hideableClass, 
+        {"sw-active": currentIndex === index}
+      );
+
+      //cloneElement not working?
+      //return React.cloneElement(child, {"key": id, "classNames": classes});
+      //
+      return (
+        <Step 
+          key={index}
+          className={classes}
+          {...child.props}>
+          {child.props.children}
+        </Step>
+      );
+    }, this);
+  },
+
   render: function () {
     var beads = this.getBeads();
-    var currentStep = this.props.children[this.state.currentStepIndex];
+    var steps = this.getPages();
     var navigation = this.getNavigation();
 
     return (
       <div className="sw-container">
         {beads}
-        {currentStep}
+        {steps}
         {navigation}
       </div>
     );
