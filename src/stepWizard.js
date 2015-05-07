@@ -71,6 +71,25 @@ var StepWizard = React.createClass({
     this.moveToPage(stepIndex);
   },
 
+  executeStepCallbacks: function(start, end) {
+    //I hate javascript scoping warnings
+    var i, child;
+
+    if(start < end) {
+      for(i = start; i < end; i++) {
+        child = this.props.children[i];
+
+        child.props.onNext(i);
+      }
+    } else if (start > end) {
+      for(i = start; i > end; i--) {
+        child = this.props.children[i];
+
+        child.props.onPrevious(i);
+      }
+    }
+  },
+
   moveToPage: function(stepIndex) {
     var minIndex = 0;
     var maxIndex = React.Children.count(this.props.children) - 1;
@@ -82,6 +101,8 @@ var StepWizard = React.createClass({
       console.warn("stepIndex was " + stepIndex + ", greater than minIndex of " + minIndex + ". Setting stepIndex to " + minIndex + ".");
       stepIndex = minIndex;
     }
+
+    this.executeStepCallbacks(this.state.currentStepIndex, stepIndex);
 
     this.setState({currentStepIndex: stepIndex});
   },

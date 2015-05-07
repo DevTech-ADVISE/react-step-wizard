@@ -12,6 +12,7 @@ Step Wizard is comprised of two components: StepWizard (the main component) and 
 
 * **title** (Required, string): The title that will be displayed on both the Step page and the navigation buttons.
 * **description** (string): If passed, it will be displayed on the both the Step page and the navigation buttons under the title.
+* **onNext/onPrevious** (function(index)): Called when changing elements. If you change selected step using the pill selector up top, it will call each one in order.
 
 ## Example Usage ##
 

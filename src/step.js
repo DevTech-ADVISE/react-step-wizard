@@ -9,12 +9,16 @@ var Step = React.createClass({
   getDefaultProps: function() {
     return {
       description: null,
+      onNext: function(){},
+      onPrevious: function(){},
     };
   },
 
   propTypes: {
     title: React.PropTypes.string.isRequired,
     description: React.PropTypes.string,
+    onNext: React.PropTypes.func,
+    onPrevious: React.PropTypes.func,
   },
 
 
@@ -24,7 +28,7 @@ var Step = React.createClass({
     var classes = classNames("sw-step", this.props.className);
 
     if(this.props.description) {
-      description = <p className="sw-description">{this.props.description}</p>
+      description = (<p className="sw-description">{this.props.description}</p>)
     }
 
     return (
