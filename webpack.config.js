@@ -10,10 +10,5 @@ module.exports = {
             { test: /\.js$/, loader: "jsx" },
             { test: /\.css$/, loader: "style!css" }
         ]
-    },
-    externals: {
-        //don't bundle the 'react' npm package with our bundle.js
-        //but get it from a global 'React' variable
-        'react': 'React'
     }
 };
