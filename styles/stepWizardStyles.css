@@ -1,5 +1,5 @@
 .sw-navigation {
-    position: absolute;
+    position: relative;
     width: 100%;
 }
 
@@ -7,6 +7,7 @@
     border: 1px black solid;
     position: absolute;
     top: 0;
+    padding: 5px;
 }
 
 .sw-button-full {
@@ -26,13 +27,43 @@
 
 .sw-step {
     position: relative;
-    left: 10%;
     width: 80%;
-    margin: 20px;
+    height: 60%;
+    left: 10%;
+    margin: 20px 0;
+    border: 1px black solid;
+    padding: 10px;
 }
-.sw-beads {
+
+/* hiding things */
+
+.sw-hidable {
+    display: none;
+}
+
+.sw-active {
+    display: block;
+}
+
+.ps-list {
     position: relative;
     text-align: center;
-    left: 10%;
-    width: 80%;
+    left: 5%;
+    width: 90%;
+    list-style-type: none;
+    padding: 0px;
+}
+
+.ps-list-item {
+    border: 1px black solid;
+    border-radius: 1em;
+    padding: 5px;
+    margin: 1px;
+    cursor: pointer;
+    display: inline;
+}
+
+.ps-selected {
+    color: white;
+    background-color: black;
 }

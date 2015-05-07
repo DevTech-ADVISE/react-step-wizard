@@ -1,5 +1,6 @@
 var react = require('react');
-
+var PillSelector = require('react-pill-selector');
+var classNames = require('classnames');
 
 var NavigationBeads = React.createClass({
   getInitialState: function() {
@@ -8,25 +9,30 @@ var NavigationBeads = React.createClass({
 
   propTypes: {
     stepData: React.PropTypes.array.isRequired,
+    onClick: React.PropTypes.func.isRequired,
+    selectedIndex: React.PropTypes.number.isRequired,
   },
 
   makeBead: function(step, index) {
-    if(step.isCurrent) {
-      return "X";
-    }
+    //var classes = classNames("sw-bead", {"sw-bead-selected": step.isCurrent});
 
-    return "O";
+    return (<li key={index}>{step.title}</li>);
+  },
+
+  onItemClick: function(id) {
+    this.props.onClick(id);
   },
 
   render: function () {
-    var beads = this.props.stepData.map(this.makeBead);
-
-    beads = beads.join("---");
-
+    var beads = this.props.stepData.map(this.makeBead, this);
+    
     return (
-      <div className="sw-beads">
+      <PillSelector
+        callClickOnLoad={false}
+        onItemClicked={this.onItemClick}
+        selectedIndex={this.props.selectedIndex}>
         {beads}
-      </div>
+      </PillSelector>
     );
   },
 });
