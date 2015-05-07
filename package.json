@@ -1,6 +1,6 @@
 {
   "name": "react-step-wizard",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "description": "Paginated step wizard",
   "main": "lib/stepWizard.js",
   "scripts": {
@@ -22,9 +22,9 @@
     "classnames": "^1.2.2",
     "css-loader": "^0.9.1",
     "jsx-loader": "^0.12.2",
-    "react": "^0.13.2",
+    "react": "0.12.2",
     "react-pill-selector": "git://github.com/BI/react-pill-selector",
-    "react-tools": "^0.13.2",
+    "react-tools": "0.12.2",
     "style-loader": "^0.8.3"
   },
   "devDependencies": {
