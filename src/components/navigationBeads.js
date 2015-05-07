@@ -1,4 +1,4 @@
-var react = require('react');
+var React = require('react');
 var PillSelector = require('react-pill-selector');
 var classNames = require('classnames');
 
