@@ -1,7 +1,8 @@
 var React = require('react');
 var Step = require('./step.js');
-var NavigationButton = require('./components/navigationButton.js');
-var NavigationBeads = require('./components/navigationBeads.js');
+var NavigationButton = require('./components/navigationButton');
+var NavigationBeads = require('./components/navigationBeads');
+var SlideReel = require('./components/slideReel');
 var classNames = require('classnames');
 
 require('../styles/stepWizardStyles.css');
@@ -194,39 +195,23 @@ var StepWizard = React.createClass({
     );
   },
 
-  getPages: function() {
-    var currentIndex = this.state.currentStepIndex;
-
-    return this.props.children.map(function(child, index) {
-      var classes = classNames(
-        child.props.classNames, 
-        this.consts.hideableClass, 
-        {"sw-active": currentIndex === index}
-      );
-
-      //cloneElement not working?
-      //return React.cloneElement(child, {"key": id, "classNames": classes});
-      //
-      return (
-        <Step 
-          key={index}
-          className={classes}
-          {...child.props}>
-          {child.props.children}
-        </Step>
-      );
-    }, this);
+  getSlide: function() {
+    return (
+      <SlideReel currentIndex={this.state.currentStepIndex}>
+        {this.props.children}
+      </SlideReel>
+    );
   },
 
   render: function () {
     var beads = this.getBeads();
-    var steps = this.getPages();
+    var slide = this.getSlide();
     var navigation = this.getNavigation();
 
     return (
       <div className="sw-container">
         {beads}
-        {steps}
+        {slide}
         {navigation}
       </div>
     );
