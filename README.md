@@ -2,6 +2,8 @@
 
 Step Wizard is comprised of two components: StepWizard (the main component) and Step (each step in the wizard). Step is a static property of StepWizard, and can be accessed with `StepWizard.Step`.
 
+To view the demo, use the command `webpack` (install from npm--`npm install webpack -g`--if you don't have it) and open index.html.
+
 ## Properties ##
 
 ### StepWizard ###
