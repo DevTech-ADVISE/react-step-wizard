@@ -22,7 +22,7 @@ var SlideReel = React.createClass({
   getSlides: function() {
     return this.props.children.map(function (child, id) {
       var style = {
-        left: (id - this.props.currentIndex) * 100 + "%",
+        left: id * 100 + "%",
       };
 
       return (
@@ -38,11 +38,16 @@ var SlideReel = React.createClass({
 
   render: function() {
     var slides = this.getSlides();
+    var style = {
+      left: -this.props.currentIndex * 100 + "%",
+    };
 
     return (
       <div className="sr-viewport">
         <div className="sr-container">
-          {slides}
+          <div className="sr-slidePanel" style={style}>
+            {slides}
+          </div>
         </div>
       </div>
     );
