@@ -55,6 +55,7 @@ body {margin:0;padding:0;}
         background-color: black;
     }
 }
+.sw-bead-error {color: #911;}
 
 .sw-step {
     position: absolute;
@@ -156,93 +157,3 @@ body {margin:0;padding:0;}
         &:first-child .sw-button {text-align: right;}
     }
 }
-
-/*
-body {
-    margin: 0;
-    padding: 0;
-}
-
-.sw-navigation-container {
-    position: absolute;
-    width: 100%;
-    height: 12%;
-    transition: .25s ease-in;
-    -webkit-transition: .25s ease-in;
-}
-
-.sw-navigation {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-}
-
-.sw-button {
-    border: 1px black solid;
-    position: absolute;
-    height: 100%;
-    top: 0;
-}
-
-.sw-button-full {
-    left: 0%;
-    width: 100%;
-}
-
-.sw-button-left {
-    left: 0%;
-    width: 50%;
-}
-
-.sw-button-right {
-    left: 50%;
-    width: 50%;
-}
-
-.sw-step {
-    position: relative;
-    border: 1px black solid;
-    left: 5%;
-    width: 90%;
-    height: 100%;
-}
-
-.ps-list {
-    position: relative;
-    text-align: center;
-    left: 5%;
-    width: 90%;
-    list-style-type: none;
-    padding: 0px;
-}
-
-.ps-list-item {
-    border: 1px black solid;
-    border-radius: 1em;
-    padding: 5px;
-    margin: 1px;
-    cursor: pointer;
-    display: inline;
-}
-
-.ps-selected {
-    color: white;
-    background-color: black;
-}
-
-$errorColor: red;
-$activeColor: #090;
-
-.sw-bead-error {
-    color: $errorColor;
-    border-color: $errorColor;
-}
-
-.sw-active {
-    border-color: $activeColor;
-
-    .sw-button {
-        border-color: $activeColor;
-    }
-}
-*/
