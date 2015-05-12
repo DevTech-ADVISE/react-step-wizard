@@ -5,7 +5,7 @@ var NavigationBeads = require('./components/navigationBeads');
 var SlideReel = require('./components/slideReel');
 var classNames = require('classnames');
 
-require('../styles/stepWizardStyles.css');
+require('../styles/stepWizardStyles.scss');
 
 
 var StepWizard = React.createClass({
@@ -181,9 +181,9 @@ var StepWizard = React.createClass({
       nextButton = this.makeNavButton(nextStepData, this.onClickNext, "sw-button-right");
     }
 
-    var classes =  classNames("sw-navigation");
+    var classes =  classNames("sw-navigation", {"sw-active": currentIndex === index});
     var style = {
-      left: (index - this.state.currentStepIndex) * 100 + "%",
+      left: index * 100 + "%",
     };
 
     return (
@@ -195,6 +195,18 @@ var StepWizard = React.createClass({
   },
 
   getSlide: function() {
+    var steps = this.props.children.map(function(child, id) {
+
+      var newProps = child.props;
+      newProps.isActive = id === this.state.currentStepIndex;
+
+      return (
+        <Step {...newProps}>
+          {child.props.children}
+        </Step>
+      );
+    }, this);
+
     return (
       <SlideReel currentIndex={this.state.currentStepIndex}>
         {this.props.children}
@@ -207,11 +219,17 @@ var StepWizard = React.createClass({
     var slide = this.getSlide();
     var navigation = this.getNavigation();
 
+    var navigationStyle = {
+      left: -this.state.currentStepIndex * 100 + "%",
+    };
+
     return (
       <div className="sw-container">
         {beads}
         {slide}
-        {navigation}
+        <div className="sw-navigation-container" style={navigationStyle}>
+          {navigation}
+        </div>
       </div>
     );
   },

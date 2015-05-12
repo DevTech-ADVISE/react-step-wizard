@@ -13,11 +13,16 @@
     left: 10%;
 }
 
+.sr-slidePanel {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    transition: .25s ease-in-out;
+    -webkit-transition: .25s ease-in-out;
+}
+
 .sr-slide {
     position: absolute;
     width: 100%;
     height: 100%;
-    top: 0;
-    transition: .25s ease-in-out;
-    -webkit-transition: .25s ease-in-out;
 }
