@@ -1,28 +1,26 @@
 .sr-viewport {
     width: 100%;
-    height: 60%;
-    margin: 2% auto;
-    padding: 2%;
+    height:100%;
+    margin: 0;
+    padding: 0;
     overflow: hidden;
+    position: relative;
 }
-
 .sr-container {
     position: relative;
-    width: 80%;
-    height: 100%;
-    left: 10%;
+    width: 92%;
+    left: 4%;
+    height:100%;
 }
-
 .sr-slidePanel {
     position: absolute;
     width: 100%;
     height: 100%;
-    transition: .25s ease-in-out;
-    -webkit-transition: .25s ease-in-out;
+    -ms-transition: all 352ms ease-in-out; /* IE10 is actually unprefixed */
+    transition: all 312ms ease-in-out 77ms;       
 }
-
 .sr-slide {
     position: absolute;
     width: 100%;
-    height: 100%;
+    height: 100%;  
 }
