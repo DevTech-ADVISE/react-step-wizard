@@ -181,14 +181,13 @@ var StepWizard = React.createClass({
       nextButton = this.makeNavButton(nextStepData, this.onClickNext, "sw-button-right");
     }
 
-    var classes = 
-      classNames("sw-navigation", 
-        this.consts.hideableClass, 
-        {"sw-active": currentIndex === index}
-      );
+    var classes =  classNames("sw-navigation");
+    var style = {
+      left: (index - this.state.currentStepIndex) * 100 + "%",
+    };
 
     return (
-      <div className={classes} key={index}>
+      <div className={classes} key={index} style={style}>
         {prevButton}
         {nextButton}
       </div>
