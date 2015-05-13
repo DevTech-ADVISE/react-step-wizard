@@ -12,6 +12,7 @@ var Step = React.createClass({
       isActive: false,
       onNext: function(){},
       onPrevious: function(){},
+      validateData: function(){ return true; },
     };
   },
 
@@ -21,6 +22,7 @@ var Step = React.createClass({
     isActive: React.PropTypes.bool,
     onNext: React.PropTypes.func,
     onPrevious: React.PropTypes.func,
+    validateData: React.PropTypes.func,
   },
 
 

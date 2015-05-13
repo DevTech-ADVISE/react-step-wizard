@@ -14,9 +14,13 @@ var NavigationBeads = React.createClass({
   },
 
   makeBead: function(step, index) {
-    //var classes = classNames("sw-bead", {"sw-bead-selected": step.isCurrent});
-
-    return (<li key={index}>{step.title}</li>);
+    var classes = classNames("sw-bead", {"sw-bead-unreachable": step.isUnreachable});
+    isDisabled = false;//step.isUnreachable;
+    return (
+      <li key={index} className={classes} isDisabled={isDisabled}>
+        {step.title}
+      </li>
+    );
   },
 
   onItemClick: function(id) {
@@ -30,7 +34,8 @@ var NavigationBeads = React.createClass({
       <PillSelector
         callClickOnLoad={false}
         onItemClicked={this.onItemClick}
-        selectedIndex={this.props.selectedIndex}>
+        selectedIndex={this.props.selectedIndex}
+        isManaged={true}>
         {beads}
       </PillSelector>
     );
