@@ -1,87 +1,159 @@
-body {
+.font {font-family: Arial, Helvetica, sans-serif;}
+.user-select-none {
+    -webkit-user-select: none;  /* Chrome all / Safari all */
+    -moz-user-select: none;     /* Firefox all */
+    -ms-user-select: none;      /* IE 10+ */
+
+    /* No support for these yet, use at own risk */
+    -o-user-select: none;
+    user-select: none;
+}
+
+
+body {margin:0;padding:0;}
+
+.sw-container {
+    @extend .font;
+    position: relative;
+    height: 100%;
+    width: 100%;
+    min-height: 400px; //added to account for .ps-list, @small-screen version could be created later
+
+    .sr-viewport {
+        height: 78%;
+        top: 10%;
+    }
+}
+
+//need to re-evalutate once react-pill-select has some default styles
+.ps-list { //ul
+    list-style-type: none;
+    padding: 0;
     margin: 0;
-    padding: 1% 0;
+    position: absolute;
+    text-align: center;
+    left: 5%;
+    width: 90%;
+    top: 0;
+    z-index: 1;
+    height: 10%;
+}
+.ps-list-item { // child of .ps-list
+    border: 1px black solid;
+    padding: 3px 7px;
+    margin: 0 .5%;
+    cursor: pointer;
+    display: inline-block;
+    border-radius: 4px;
+    height: 18px;
+    position: relative;
+    top: 50%;
+    margin-top: -12px;
+
+    &.ps-selected { //active class
+        color: white;
+        background-color: black;
+    }
+}
+.sw-bead-error {color: #911;}
+
+.sw-step {
+    position: absolute;
+    border: 0;
+    left: 1%;
+    width: 98%;
+    height: 96%;
+    top: 0px;
+    box-sizing: border-box;
+    border-radius: 3px;
+    padding:20px 23px;
+    box-shadow: inset 0 0 2px #464646, 1px 1px 4px 1px rgba(0, 0, 0, 0.14);
+
+    .sw-title { //h1
+        margin:0;
+    }
+
+    &.sw-active {//active class
+        box-shadow: inset 0 0 2px #383838, 2px 3px 6px 1px rgba(0, 0, 0, 0.16);
+    }
 }
 
 .sw-navigation-container {
     position: absolute;
     width: 100%;
-    height: 12%;
-    transition: .25s ease-in;
-    -webkit-transition: .25s ease-in;
-}
+    height: 11%;
+    bottom: 0;
+    overflow: hidden;
 
-.sw-navigation {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-}
-
-.sw-button {
-    border: 1px black solid;
-    position: absolute;
-    height: 100%;
-    top: 0;
-}
-
-.sw-button-full {
-    left: 0%;
-    width: 100%;
-}
-
-.sw-button-left {
-    left: 0%;
-    width: 50%;
-}
-
-.sw-button-right {
-    left: 50%;
-    width: 50%;
-}
-
-.sw-step {
-    position: relative;
-    border: 1px black solid;
-    left: 5%;
-    width: 90%;
-    height: 100%;
-}
-
-.ps-list {
-    position: relative;
-    text-align: center;
-    left: 5%;
-    width: 90%;
-    list-style-type: none;
-    padding: 0px;
-}
-
-.ps-list-item {
-    border: 1px black solid;
-    border-radius: 1em;
-    padding: 5px;
-    margin: 1px;
-    cursor: pointer;
-    display: inline;
-}
-
-.ps-selected {
-    color: white;
-    background-color: black;
-}
-
-$errorColor: red;
-$activeColor: #090;
-
-.sw-bead-error {
-    color: $errorColor;
-    border-color: $errorColor;
-}
-
-.sw-active {
-    border-color: $activeColor;
-
+    .sw-navigation-panel {
+        width: 100%;
+        height: 100%;
+        position: relative;
+        -ms-transition: all 352ms ease-in-out; /* same as .main-content transition, IE10 is actually unprefixed */
+        transition: all 389ms ease-in-out;
+    }
     .sw-button {
-        border-color: $activeColor;
+        @extend .user-select-none;
+        cursor: pointer;
+        width: 100%;
+        height: 100%;
+        display: inline-block;
+        box-sizing: border-box;
+        text-align: left;
+        background-color: #ddd;
+        border-radius: 3px;
+        color: #555;
+        position: relative;
+        padding: .4% 1%;
+        box-shadow: inset 2px 2px 2px 0px rgba(255, 255, 255, 0.3), inset -1px -1px 1px 0 rgba(0, 0, 0, 0.05);
+        border: 1px solid #aaa;
+        margin: 0px;
+        border-top-color: #c0c0c0;
+        border-left-color: #b0b0b0;
+
+        &:hover {
+            background-color:#e6e6e6;
+            box-shadow: inset 1px 1px 1px 0px rgba(255,255,255,.7), inset 0 0 1px 0 rgba(0,0,0,.1);
+        }
+
+        &:active {
+            background-color:#efefef;
+            box-shadow: inset 1px 1px 1px 0px rgba(255,255,255,.7), inset 0 0 1px 0 rgba(0,0,0,.1);
+            color: #2d8bee;
+        }
+
+        //&.sw-button-full {} //assumed
+        &.sw-button-left {
+            width: 49.8%;
+            float: left;
+        }
+        &.sw-button-right {
+            width: 49.8%;
+            text-align: right;
+            float: right;
+        }
+
+        .sw-title {
+            margin: 0;
+            padding: 0;
+            font-size: 1.1em;
+
+        }
+        .sw-description {
+            margin:0;
+            font-size: .9em;
+        }
+    }
+    
+    .sw-navigation {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        padding: 0px .3% .3%;
+        box-sizing: border-box;
+
+        &.sw-active {} //active class
+        
+        &:first-child .sw-button {text-align: right;}
     }
 }

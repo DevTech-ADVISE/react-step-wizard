@@ -227,8 +227,10 @@ var StepWizard = React.createClass({
       <div className="sw-container">
         {beads}
         {slide}
-        <div className="sw-navigation-container" style={navigationStyle}>
-          {navigation}
+        <div className="sw-navigation-container">
+          <div className="sw-navigation-panel" style={navigationStyle}>
+            {navigation}
+          </div>
         </div>
       </div>
     );
