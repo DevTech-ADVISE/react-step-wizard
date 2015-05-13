@@ -9,8 +9,11 @@
     user-select: none;
 }
 
-
+// make sure your container is 100% height, with doctype html you will need to get specific
+html, body {height:100%;}
 body {margin:0;padding:0;}
+#content {height:100%;}
+//
 
 .sw-container {
     @extend .font;
@@ -44,10 +47,10 @@ body {margin:0;padding:0;}
         cursor: pointer;
         display: inline-block;
         border-radius: 4px;
-        height: 18px;
         position: relative;
-        top: 50%;
-        margin-top: -12px;
+        top: 10%;
+        box-sizing: border-box;
+        height: 80%;
 
         &.ps-selected { //active class
             color: white;
