@@ -16,7 +16,6 @@ var StepWizard = React.createClass({
   getInitialState: function() {
     return {
       currentStepIndex: 0,
-      furthestIndex: 0,
     };
   },
 
@@ -36,11 +35,6 @@ var StepWizard = React.createClass({
 
   componentWillMount: function() {
     this.validateChildren();
-  },
-
-  componentDidMount: function() {
-    var furthestIndex = this.calculateFurthestIndex();
-    this.setState({furthestIndex: furthestIndex});
   },
 
   validateChildren: function() {
@@ -101,13 +95,13 @@ var StepWizard = React.createClass({
 
   calculateFurthestIndex: function() {
     var minIndex = 0;
-    var maxIndex = React.Children.count(this.props.children) - 1;
+    var maxIndex = this.props.children.length;
     var i;
 
     for(i = minIndex; i < maxIndex; i++) {
       var child = this.props.children[i];
 
-      if(!child.props.validateData(i)) {
+      if(!child.props.isValid) {
         return i;
       }
     }
@@ -137,7 +131,7 @@ var StepWizard = React.createClass({
 
     this.executeStepCallbacks(this.state.currentStepIndex, stepIndex);
 
-    this.setState({currentStepIndex: stepIndex, furthestIndex: furthestIndex});
+    this.setState({currentStepIndex: stepIndex});
   },
 
   getStepData: function(step, index) {
@@ -146,7 +140,7 @@ var StepWizard = React.createClass({
       description: step.props.description,
       index: index,
       isCurrent: index === this.state.currentStepIndex,
-      isUnreachable: index > this.state.furthestIndex,
+      isUnreachable: index > this.calculateFurthestIndex(),
     };
   },
 
