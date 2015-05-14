@@ -25,7 +25,6 @@ var Step = React.createClass({
     isValid: React.PropTypes.bool,
   },
 
-
   render: function () {
     var description = null;
 
@@ -39,11 +38,15 @@ var Step = React.createClass({
       description = (<p className="sw-description">{this.props.description}</p>)
     }
 
+    var style = {display: this.props.isActive ? "block" : "none"};
+  
     return (
       <div className={classes}>
         <h1 className="sw-title">{this.props.title}</h1>
         {description}
-        {this.props.children}
+        <div style={style}>
+          {this.props.children}
+        </div>
       </div>
     );
   },

@@ -168,11 +168,12 @@ var StepWizard = React.createClass({
     return this.getStepData(step, index);
   },
 
-  makeNavButton: function(buttonData, onClick, className) {
+  makeNavButton: function(buttonData, onClick, isShown, className) {
     return (
       <NavigationButton
         stepData={buttonData}
         onClick={onClick}
+        isShown={isShown}
         className={className}/>
     )
   },
@@ -195,20 +196,21 @@ var StepWizard = React.createClass({
 
     var prevStepData = this.getStepDataAt(index - 1);
     var nextStepData = this.getStepDataAt(index + 1);
+    var isActive = currentIndex === index;
 
     var prevButton = null;
     var nextButton = null;
 
     if(prevStepData === null) {
-      nextButton = this.makeNavButton(nextStepData, this.onClickNext, "sw-button-full");
+      nextButton = this.makeNavButton(nextStepData, this.onClickNext, isActive, "sw-button-full");
     } else if(nextStepData === null) {
-      prevButton = this.makeNavButton(prevStepData, this.onClickPrev, "sw-button-full");
+      prevButton = this.makeNavButton(prevStepData, this.onClickPrev, isActive, "sw-button-full");
     } else {
-      prevButton = this.makeNavButton(prevStepData, this.onClickPrev, "sw-button-left");
-      nextButton = this.makeNavButton(nextStepData, this.onClickNext, "sw-button-right");
+      prevButton = this.makeNavButton(prevStepData, this.onClickPrev, isActive, "sw-button-left");
+      nextButton = this.makeNavButton(nextStepData, this.onClickNext, isActive, "sw-button-right");
     }
 
-    var classes =  classNames("sw-navigation", {"sw-active": currentIndex === index});
+    var classes =  classNames("sw-navigation");
     var style = {
       left: index * 100 + "%",
     };
@@ -236,7 +238,7 @@ var StepWizard = React.createClass({
 
     return (
       <SlideReel currentIndex={this.state.currentStepIndex}>
-        {this.props.children}
+        {steps}
       </SlideReel>
     );
   },
