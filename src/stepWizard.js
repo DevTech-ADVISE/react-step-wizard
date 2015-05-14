@@ -238,7 +238,7 @@ var StepWizard = React.createClass({
 
     return (
       <SlideReel currentIndex={this.state.currentStepIndex}>
-        {this.props.children}
+        {steps}
       </SlideReel>
     );
   },
