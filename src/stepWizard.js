@@ -199,16 +199,18 @@ var StepWizard = React.createClass({
     var prevButton = null;
     var nextButton = null;
 
+    var disabledClass = {"sw-disabled": currentIndex !== index};
+
     if(prevStepData === null) {
-      nextButton = this.makeNavButton(nextStepData, this.onClickNext, "sw-button-full");
+      nextButton = this.makeNavButton(nextStepData, this.onClickNext, classNames("sw-button-full", disabledClass));
     } else if(nextStepData === null) {
-      prevButton = this.makeNavButton(prevStepData, this.onClickPrev, "sw-button-full");
+      prevButton = this.makeNavButton(prevStepData, this.onClickPrev, classNames("sw-button-full", disabledClass));
     } else {
-      prevButton = this.makeNavButton(prevStepData, this.onClickPrev, "sw-button-left");
-      nextButton = this.makeNavButton(nextStepData, this.onClickNext, "sw-button-right");
+      prevButton = this.makeNavButton(prevStepData, this.onClickPrev, classNames("sw-button-left", disabledClass));
+      nextButton = this.makeNavButton(nextStepData, this.onClickNext, classNames("sw-button-right", disabledClass));
     }
 
-    var classes =  classNames("sw-navigation", {"sw-active": currentIndex === index});
+    var classes =  classNames("sw-navigation");
     var style = {
       left: index * 100 + "%",
     };
