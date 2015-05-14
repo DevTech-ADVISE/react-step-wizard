@@ -13,8 +13,9 @@ To view the demo, use the command `webpack` (install from npm--`npm install webp
 ### Step ###
 
 * **title** (Required, string): The title that will be displayed on both the Step page and the navigation buttons.
-* **description** (string): If passed, it will be displayed on the both the Step page and the navigation buttons under the title.
-* **onNext/onPrevious** (function(index)): Called when changing elements. If you change selected step using the pill selector up top, it will call each one in order.
+* **description** (string, ""): If passed, it will be displayed on the both the Step page and the navigation buttons under the title.
+* **onNext/onPrevious** (function(index), function(){}): Called when changing elements. If you change selected step using the pill selector up top, it will call each one in order.
+* **isValid** (bool, true): Will update step wizard when changed. Does not allow progression beyond the first step with `isValid==false`, regardless of other steps' validity.
 
 ## Example Usage ##
 
@@ -38,29 +39,3 @@ To view the demo, use the command `webpack` (install from npm--`npm install webp
         </Step>
       </StepWizard>,
       document.getElementById('content'));
-
-## CSS Information ##
-
-    <div class="sw-container">
-      <div class="sw-beads"/>
-      <div class="sw-step">
-        <h1 class="sw-title" />
-        <p class="sw-description" /> <!-- only if included -->
-        <!-- Content Goes Here -->
-      </div>
-      
-      <div class="sw-navigation">
-        <!-- See "Buttons" below -->
-      </div>
-    </div>
-
-### Buttons ###
-
-If the step is the first or last, there will only be one button:
-
-    <div class="sw-button sw-button-full"/>
-
-Otherwise, there will be two buttons:
-
-    <div class="sw-button sw-button-left"/>
-    <div class="sw-button sw-button-right"/>
