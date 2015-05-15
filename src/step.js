@@ -42,7 +42,6 @@ var Step = React.createClass({
   
     return (
       <div className={classes}>
-        <h1 className="sw-title">{this.props.title}</h1>
         {description}
         <div style={style}>
           {this.props.children}
