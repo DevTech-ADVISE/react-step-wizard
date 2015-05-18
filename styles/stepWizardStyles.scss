@@ -32,35 +32,27 @@ body {margin:0;padding:0;}
         top: 10%;
     }
 
-    //need to re-evalutate once react-pill-select has some default styles
     .ps-list { //ul
-        list-style-type: none;
-        padding: 0;
-        margin: 0;
         position: absolute;
-        text-align: center;
         left: 5%;
         width: 90%;
         top: 0;
         z-index: 1;
         height: 10%;
-    }
-    .ps-list-item { // child of .ps-list
-        border: 1px black solid;
-        padding: 3px 7px;
-        margin: 0 .5%;
-        cursor: pointer;
-        display: inline-block;
-        border-radius: 4px;
-        position: relative;
-        top: 10%;
-        box-sizing: border-box;
-        height: 80%;
 
-        &.ps-selected { //active class
-            color: white;
-            background-color: black;
+        &:after {
+            display: inline-block;
+            vertical-align: middle;
+            content: '';
+            height: 100%;
+            margin-left: -0.25em; // to offset spacing, may vary by font
         }
+    }
+    .ps-list > li {
+        display: inline-block;
+        vertical-align: middle;
+        max-width: 99%; // prevents issues with long content causes the content block to be pushed to the top
+        /* max-width: calc(100% - 0.25em) /* Only for IE9+ */
     }
 }
 
