@@ -84,14 +84,18 @@ body {margin:0;padding:0;}
     }
 
     .sw-header {
-        display:table-row;
+        display:table-header-group;
 
         @extend .group;
     }
     .sw-content {
-        display: table-cell;
-        height: 100%;
-        overflow-y: auto;
+        display: table-row;
+
+        .overflow-y {
+            width: 100%;
+            height: 100%;
+            overflow-y: auto;
+        }
     }
 
     &.sw-active {//active class
