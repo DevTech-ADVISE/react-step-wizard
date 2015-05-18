@@ -8,6 +8,11 @@
     -o-user-select: none;
     user-select: none;
 }
+.group:after {
+  content: "";
+  display: table;
+  clear: both;
+}
 
 // make sure your container is 100% height, with doctype html you will need to get specific
 html, body {height:100%;}
@@ -68,6 +73,7 @@ body {margin:0;padding:0;}
     width: 98%;
     height: 96%;
     top: 0px;
+    display: table;
     box-sizing: border-box;
     border-radius: 3px;
     padding:20px 23px;
@@ -75,6 +81,21 @@ body {margin:0;padding:0;}
 
     .sw-title { //h1
         margin:0;
+    }
+
+    .sw-header {
+        display:table-header-group;
+
+        @extend .group;
+    }
+    .sw-content {
+        display: table-row;
+
+        .overflow-y {
+            width: 100%;
+            height: 100%;
+            overflow-y: auto;
+        }
     }
 
     &.sw-active {//active class
