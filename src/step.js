@@ -37,13 +37,11 @@ var Step = React.createClass({
     if(this.props.description) {
       description = (<p className="sw-description">{this.props.description}</p>)
     }
-
-    var style = {display: this.props.isActive ? "block" : "none"};
   
     return (
       <div className={classes}>
         {description}
-        <div style={style}>
+        <div>
           {this.props.children}
         </div>
       </div>
