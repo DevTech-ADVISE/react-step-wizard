@@ -35,14 +35,18 @@ var Step = React.createClass({
     );
 
     if(this.props.description) {
-      description = (<p className="sw-description">{this.props.description}</p>)
+      description = (<div className="sw-header"><p className="sw-description">{this.props.description}</p></div>)
     }
   
     return (
       <div className={classes}>
         {description}
-        <div>
-          {this.props.children}
+        <div className="sw-content">
+          <div className="overflow-y">
+            <div style={style}>
+              {this.props.children}
+            </div>
+          </div>
         </div>
       </div>
     );
