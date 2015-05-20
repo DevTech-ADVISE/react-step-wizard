@@ -43,7 +43,7 @@ var Step = React.createClass({
         {description}
         <div className="sw-content">
           <div className="overflow-y">
-            <div style={style}>
+            <div>
               {this.props.children}
             </div>
           </div>
