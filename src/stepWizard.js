@@ -21,12 +21,12 @@ var StepWizard = React.createClass({
 
   getDefaultProps: function() {
     return {
-
+      loopBeginning: true
     };
   },
 
   propTypes: {
-
+    loopBeginning: React.PropTypes.bool
   },
 
   consts: {
@@ -61,8 +61,12 @@ var StepWizard = React.createClass({
     var stepIndex = this.state.currentStepIndex;
     var maxIndex = React.Children.count(this.props.children) - 1;
 
-    stepIndex = Math.min(stepIndex + 1, maxIndex);
+    if(stepIndex === maxIndex && this.props.loopBeginning)
+      stepIndex = 0;
+    else
+      stepIndex = Math.min(stepIndex + 1, maxIndex);
     
+
     this.moveToPage(stepIndex);
   },
 
@@ -194,6 +198,7 @@ var StepWizard = React.createClass({
   getNavigationAt: function(index) {
     var currentIndex = this.state.currentStepIndex;
 
+    var beginningStepData = this.getStepDataAt(0);
     var prevStepData = this.getStepDataAt(index - 1);
     var nextStepData = this.getStepDataAt(index + 1);
     var isActive = currentIndex === index;
@@ -204,7 +209,13 @@ var StepWizard = React.createClass({
     if(prevStepData === null) {
       nextButton = this.makeNavButton(nextStepData, this.onClickNext, isActive, "sw-button-full");
     } else if(nextStepData === null) {
-      prevButton = this.makeNavButton(prevStepData, this.onClickPrev, isActive, "sw-button-full");
+      if(this.props.loopBeginning){
+        prevButton = this.makeNavButton(prevStepData, this.onClickPrev, isActive, "sw-button-left");
+        nextButton = this.makeNavButton(beginningStepData, this.onClickNext, isActive, "sw-button-right");
+      }
+      else
+        prevButton = this.makeNavButton(prevStepData, this.onClickPrev, isActive, "sw-button-full");
+      
     } else {
       prevButton = this.makeNavButton(prevStepData, this.onClickPrev, isActive, "sw-button-left");
       nextButton = this.makeNavButton(nextStepData, this.onClickNext, isActive, "sw-button-right");
