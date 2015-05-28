@@ -1,5 +1,5 @@
 var React = require('react');
-var StepWizard = require('./src/stepWizard.js');
+var StepWizard = require('./lib/index.js');
 var Step = StepWizard.Step;
 
 function onNext(id) {

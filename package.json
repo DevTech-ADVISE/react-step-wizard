@@ -2,17 +2,23 @@
   "name": "react-step-wizard",
   "version": "0.6.1",
   "description": "Paginated step wizard",
-  "main": "lib/stepWizard.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "install": "jsx src lib",
-    "build": "jsx src lib"
+    "test": "eslint lib/ spec/ && ./node_modules/karma/bin/karma start karma.conf.js",
+    "watch-test": "./node_modules/karma/bin/karma start karma.conf.js --auto-watch --no-single-run",
+    "build": "webpack -p",
+    "dev": "webpack-dev-server --inline --hot"
   },
+  "main": "./lib/index.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/YeahButHats/react-step-wizard.git"
   },
   "author": "",
+  "keywords": [
+    "react",
+    "reactjs",
+    "react-component"
+  ],
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/YeahButHats/react-step-wizard/issues"
@@ -20,16 +26,28 @@
   "homepage": "https://github.com/YeahButHats/react-step-wizard",
   "dependencies": {
     "classnames": "^1.2.2",
-    "css-loader": "^0.9.1",
-    "jsx-loader": "^0.12.2",
-    "node-sass": "^2.0.1",
-    "sass-loader": "^0.5.0",
-    "react": "0.12.2",
-    "react-pill-selector": "git://github.com/YeahButHats/react-pill-selector",
-    "react-tools": "0.12.2",
-    "style-loader": "^0.8.3"
+    "react": "~0.12.2",
+    "react-pill-selector": "git://github.com/BI/react-pill-selector",
+    "babel-runtime": "~5.4.3"
   },
   "devDependencies": {
-    "webpack": "^1.8.10"
+    "babel-core": "~5.4.3",
+    "babel-eslint": "^3.1.4",
+    "babel-loader": "~5.1.2",
+    "css-loader": "~0.12.1",
+    "es5-shim": "~4.1.0",
+    "eslint": "^0.21.1",
+    "eslint-plugin-react": "^2.3.0",
+    "jasmine": "~2.2.1",
+    "jasmine-core": "~2.2.0",
+    "karma": "~0.12.31",
+    "karma-jasmine": "~0.3.5",
+    "karma-phantomjs-launcher": "~0.1.4",
+    "karma-sourcemap-loader": "~0.3.4",
+    "karma-webpack": "~1.5.0",
+    "sass-loader": "~1.0.2",
+    "style-loader": "~0.12.2",
+    "webpack": "~1.5.3",
+    "webpack-dev-server": "~1.7.0"
   }
 }

@@ -4,6 +4,13 @@ Step Wizard is comprised of two components: StepWizard (the main component) and 
 
 To view the demo, use the command `webpack` (install from npm--`npm install webpack -g`--if you don't have it) and open index.html.
 
+## Development ##
+
+* Development server `npm run dev`.
+* Continuously run tests on file changes `npm run watch-test`;
+* Run tests: `npm test`;
+* Build `npm run build`;
+
 ## Properties ##
 
 ### StepWizard ###
