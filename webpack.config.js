@@ -1,15 +1,35 @@
+/* jshint node: true */
+var path = require('path');
+
+
 module.exports = {
-    entry: "./index.js",
-    output: {
-        path: __dirname,
-        filename: "bundle.js"
-    },
-    devtool: 'source-map',
-    module: {
-        loaders: [
-            { test: /\.js$/, loader: "jsx" },
-            { test: /\.css$/, loader: "style!css" },
-            { test: /\.scss$/, loader: "style!css!sass" }
-        ]
-    }
+  context: path.join(__dirname),
+  entry: './example.js',
+
+  output: {
+    path: path.join(__dirname),
+    filename: 'react-step-wizard.js',
+    libraryTarget: 'umd',
+    library: 'ReactStepWizard'
+  },
+
+  module: {
+    loaders: [
+      {
+        test: /\.scss$/,
+        // Query parameters are passed to node-sass
+        loader: 'style!css!sass?outputStyle=expanded&' +
+          'includePaths[]=' + (path.resolve(__dirname, './node_modules'))
+      },
+      {
+        test: /(\.js)|(\.jsx)$/,
+        exclude: /node_modules/,
+        loader: 'babel-loader',
+        query: {
+          optional: ['runtime'],
+          stage: 0
+        }
+      }
+    ]
+  }
 };
