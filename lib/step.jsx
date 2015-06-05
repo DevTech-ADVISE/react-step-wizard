@@ -12,6 +12,7 @@ var Step = React.createClass({
       isActive: false,
       onNext: function(){},
       onPrevious: function(){},
+      onError: function(){},
       isValid: true,
     };
   },
@@ -22,6 +23,7 @@ var Step = React.createClass({
     isActive: React.PropTypes.bool,
     onNext: React.PropTypes.func,
     onPrevious: React.PropTypes.func,
+    onError: React.PropTypes.func,
     isValid: React.PropTypes.bool,
   },
 
