@@ -23,7 +23,7 @@ module.exports = {
       },
       {
         test: /(\.js)|(\.jsx)$/,
-        exclude: /node_modules/,
+        exclude: /node_modules\/(?!react)/,
         loader: 'babel-loader',
         query: {
           optional: ['runtime'],

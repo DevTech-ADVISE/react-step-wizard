@@ -15,7 +15,7 @@ var NavigationBeads = React.createClass({
 
   makeBead: function(step, index) {
     var classes = classNames("sw-bead", {"sw-bead-unreachable": step.isUnreachable});
-    isDisabled = false;//step.isUnreachable;
+    var isDisabled = false;//step.isUnreachable;
     return (
       <li key={index} className={classes} isDisabled={isDisabled}>
         {step.title}

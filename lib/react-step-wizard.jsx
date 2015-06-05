@@ -94,6 +94,9 @@ var StepWizard = React.createClass({
 
         child.props.onPrevious(i);
       }
+    } else if (start === end) {
+      child = this.props.children[start];
+      child.props.onError(start);
     }
   },
 

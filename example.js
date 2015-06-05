@@ -27,6 +27,10 @@ var App = React.createClass({
     this.setState({isButtonPressed: true});
   },
 
+  showErrorMessage: function(errorMessage) {
+    console.log(errorMessage);
+  },
+
   render: function() {
     return (
       <StepWizard>
@@ -37,6 +41,7 @@ var App = React.createClass({
         <Step title="The Second"
           onNext={onNext}
           onPrevious={onPrevious}
+          onError={this.showErrorMessage.bind(this, "You must enter some text")}
           isValid={this.state.hasText}>
           <p>This is the second step, it has an input tag. It needs text before you can go on.</p>
           <input type="text" ref="textInput" onChange={this.onTextChange}/>
@@ -44,6 +49,7 @@ var App = React.createClass({
         <Step title="The Almost Last"
           description="Whoa aren't descriptions neat?"
           onNext={onNext} onPrevious={onPrevious}
+          onError={this.showErrorMessage.bind(this, "Press the button first")}
           isValid={this.state.isButtonPressed}>
           <p>Press the button to be able to continue.</p>
           <input type="button" disabled={this.state.isButtonPressed} value="Here's a button" onClick={this.onPress}/>

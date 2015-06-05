@@ -9,8 +9,6 @@ var NavigationButton = React.createClass({
   },
 
   render: function () {
-    var classes = classNames("sw-button", this.props.className);
-
     var stepData = this.props.stepData;
 
     var description = null;
@@ -23,8 +21,10 @@ var NavigationButton = React.createClass({
       );
     }
 
+    var classes = classNames("sw-button", this.props.className, {"disabled": stepData.isUnreachable || !this.props.isShown});
+
     return (
-      <button className={classes} disabled={stepData.isUnreachable || !this.props.isShown} onClick={this.props.onClick}>
+      <button className={classes} onClick={this.props.onClick}>
         <h1 className="sw-title">{stepData.title}</h1>
         {description}
       </button>
