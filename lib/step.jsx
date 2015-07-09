@@ -13,7 +13,7 @@ var Step = React.createClass({
       onNext: function(){},
       onPrevious: function(){},
       onError: function(){},
-      isValid: true,
+      isValid: true
     };
   },
 

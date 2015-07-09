@@ -240,14 +240,11 @@ var StepWizard = React.createClass({
   getSlide: function() {
     var steps = this.props.children.map(function(child, id) {
 
-      var newProps = child.props;
+      var newProps = {};
       newProps.isActive = id === this.state.currentStepIndex;
+      newProps.key = id;
 
-      return (
-        <Step {...newProps}>
-          {child.props.children}
-        </Step>
-      );
+      return React.cloneElement(child, newProps);
     }, this);
 
     return (
