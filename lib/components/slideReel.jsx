@@ -9,12 +9,6 @@ var SlideReel = React.createClass({
     };
   },
 
-  getDefaultProps: function() {
-    return {
-
-    };
-  },
-
   propTypes: {
     currentIndex: React.PropTypes.number.isRequired,
   },
