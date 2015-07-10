@@ -42,12 +42,8 @@ var Step = React.createClass({
   
     return (
       <div className={classes}>
-        <div className="sw-content">
-          <div className="overflow-y">
-            <div>
-              {this.props.children}
-            </div>
-          </div>
+        <div className="overflow-y">
+          {this.props.children}
         </div>
       </div>
     );
