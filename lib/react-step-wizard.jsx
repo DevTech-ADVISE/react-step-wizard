@@ -62,7 +62,6 @@ var StepWizard = React.createClass({
   },
 
   navigateBack: function(event) {
-    console.log(event);
     this.setState(event.state);
   },
 
