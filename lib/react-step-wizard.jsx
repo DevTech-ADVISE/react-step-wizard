@@ -37,6 +37,39 @@ var StepWizard = React.createClass({
     this.validateChildren();
   },
 
+  componentDidMount: function() {
+    if(window.addEventListener) {
+      window.addEventListener('popstate', this.navigateBack);
+    } else if (window.attachEvent) {
+      window.attachEvent('onpopstate', this.navigateBack);
+    } else {
+      window.onpopstate = this.navigateBack;
+    }
+
+    window.history.replaceState({currentStepIndex: 0}, 'Step 0');
+  },
+
+  componentWillUnmount: function() {
+    window.history.go(-this.state.currentStepIndex-2);
+
+    if(window.addEventListener) {
+      window.removeEventListener('popstate', this.navigateBack);
+    } else if (window.attachEvent) {
+      window.detachEvent('onpopstate', this.navigateBack);
+    } else {
+      window.onpopstate = function(){};
+    }
+  },
+
+  navigateBack: function(event) {
+    console.log(event);
+    this.setState(event.state);
+  },
+
+  pushState: function(index) {
+    window.history.pushState({currentStepIndex: index}, 'Step ' + index);
+  },
+
   validateChildren: function() {
     React.Children.forEach(this.props.children, function(child) {
       var type = child.type;
@@ -61,11 +94,11 @@ var StepWizard = React.createClass({
     var stepIndex = this.state.currentStepIndex;
     var maxIndex = React.Children.count(this.props.children) - 1;
 
-    if(stepIndex === maxIndex && this.props.loopBeginning)
+    if(stepIndex === maxIndex && this.props.loopBeginning) {
       stepIndex = 0;
-    else
+    } else {
       stepIndex = Math.min(stepIndex + 1, maxIndex);
-    
+    }
 
     this.moveToPage(stepIndex);
   },
@@ -87,6 +120,7 @@ var StepWizard = React.createClass({
         child = this.props.children[i];
 
         child.props.onNext(i);
+        this.pushState(i+1);
       }
     } else if (start > end) {
       for(i = start; i > end; i--) {
@@ -129,7 +163,6 @@ var StepWizard = React.createClass({
     }
 
     var currentIndex = this.state.currentStepIndex;
-    var direction = stepIndex - currentIndex;
 
     var furthestIndex = this.calculateFurthestIndex();
     if(furthestIndex < stepIndex) {
@@ -137,6 +170,11 @@ var StepWizard = React.createClass({
     }
 
     this.executeStepCallbacks(this.state.currentStepIndex, stepIndex);
+    var direction = stepIndex - currentIndex;
+
+    if(direction < 0) {
+      window.history.go(direction);
+    }
 
     this.setState({currentStepIndex: stepIndex});
   },
