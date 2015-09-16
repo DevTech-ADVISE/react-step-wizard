@@ -25,10 +25,11 @@
   },
   "homepage": "https://github.com/BI/react-step-wizard",
   "dependencies": {
+    "babel-runtime": "~5.4.3",
     "classnames": "^1.2.2",
     "react": "~0.13.0",
-    "react-pill-selector": "git://github.com/BI/react-pill-selector",
-    "babel-runtime": "~5.4.3"
+    "react-event-listener": "0.0.2",
+    "react-pill-selector": "git://github.com/BI/react-pill-selector"
   },
   "devDependencies": {
     "babel-core": "~5.4.3",
