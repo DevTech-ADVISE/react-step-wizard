@@ -5,12 +5,22 @@ var NavigationBeads = require('./components/navigationBeads.jsx');
 var SlideReel = require('./components/slideReel.jsx');
 var classNames = require('classnames');
 
+var EventsMixin = require('react-event-listener');
+
 require('./react-step-wizard.scss');
 
 
 var StepWizard = React.createClass({
   statics: {
     Step: Step,
+  },
+
+  mixins: [EventsMixin],
+
+  listeners: {
+    window: {
+      popstate: 'navigateBack'
+    }
   },
 
   getInitialState: function() {
@@ -38,31 +48,25 @@ var StepWizard = React.createClass({
   },
 
   componentDidMount: function() {
-    if(window.addEventListener) {
-      window.addEventListener('popstate', this.navigateBack);
-    } else if (window.attachEvent) {
-      window.attachEvent('onpopstate', this.navigateBack);
-    } else {
-      window.onpopstate = this.navigateBack;
+    //This will reset the history when you navigate away from thise page and hit back
+    if(window.history.state && window.history.state.currentStepIndex !== undefined) {
+      window.history.go(-window.history.state.currentStepIndex);
+      return;
     }
 
     window.history.replaceState({currentStepIndex: 0}, 'Step 0');
   },
 
   componentWillUnmount: function() {
-    window.history.go(-this.state.currentStepIndex-2);
-
-    if(window.addEventListener) {
-      window.removeEventListener('popstate', this.navigateBack);
-    } else if (window.attachEvent) {
-      window.detachEvent('onpopstate', this.navigateBack);
-    } else {
-      window.onpopstate = function(){};
-    }
+    this.resetHistory();
   },
 
   navigateBack: function(event) {
     this.setState(event.state);
+  },
+
+  resetHistory: function() {
+    window.history.go(-this.state.currentStepIndex);
   },
 
   pushState: function(index) {
