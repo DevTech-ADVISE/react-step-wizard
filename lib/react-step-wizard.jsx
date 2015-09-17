@@ -50,7 +50,6 @@ var StepWizard = React.createClass({
   componentDidMount: function() {
     //This will reset the history when you navigate away from thise page and hit back
     if(window.history.state && window.history.state.currentStepIndex > 0) {
-      console.log('resetting history by', window.history.state.currentStepIndex);
       window.history.go(-window.history.state.currentStepIndex);
       return;
     }
@@ -63,7 +62,6 @@ var StepWizard = React.createClass({
   },
 
   navigateBack: function(event) {
-    console.log('current state step is', window.history.state.currentStepIndex);
     this.moveToPage(event.state.currentStepIndex);
   },
 
@@ -182,7 +180,6 @@ var StepWizard = React.createClass({
     var direction = stepIndex - window.history.state.currentStepIndex;
 
     if(direction < 0) {
-      console.log(stepIndex, window.history.state.currentStepIndex);
       window.history.go(direction);
     }
 
