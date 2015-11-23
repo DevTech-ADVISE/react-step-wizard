@@ -48,6 +48,17 @@ var StepWizard = React.createClass({
   },
 
   componentDidMount: function() {
+    this.onMountHistoryFix();
+  },
+
+  onMountHistoryFix: function() {
+    //IE 9 doesn't support altering history (otherwise IE 6 wouldn't have happened)
+    if(!window.history.pushState) {
+      return;
+    }
+
+    console.log('Initial History fix happened');
+
     //This will reset the history when you navigate away from thise page and hit back
     if(window.history.state && window.history.state.currentStepIndex > 0) {
       window.history.go(-window.history.state.currentStepIndex);
@@ -62,6 +73,10 @@ var StepWizard = React.createClass({
   },
 
   navigateBack: function(event) {
+    if(!event || !event.state) {
+      return;
+    }
+    
     if(this.state.currentStepIndex === event.state.currentStepIndex) {
       return;
     }
@@ -70,10 +85,18 @@ var StepWizard = React.createClass({
   },
 
   resetHistory: function() {
+    if(!window.history.pushState) {
+      return;
+    }
+
     window.history.go(-this.state.currentStepIndex);
   },
 
   pushState: function(index) {
+    if(!window.history.pushState) {
+      return;
+    }
+
     if(index <= window.history.state.currentStepIndex) {
       return;
     }
@@ -181,10 +204,13 @@ var StepWizard = React.createClass({
     }
 
     this.executeStepCallbacks(this.state.currentStepIndex, stepIndex);
-    var direction = stepIndex - window.history.state.currentStepIndex;
 
-    if(direction < 0) {
-      window.history.go(direction);
+    if(window.history.pushState) {
+      var direction = stepIndex - window.history.state.currentStepIndex;
+
+      if(direction < 0) {
+        window.history.go(direction);
+      }
     }
 
     this.setState({currentStepIndex: stepIndex});
