@@ -57,8 +57,6 @@ var StepWizard = React.createClass({
       return;
     }
 
-    console.log('Initial History fix happened');
-
     //This will reset the history when you navigate away from thise page and hit back
     if(window.history.state && window.history.state.currentStepIndex > 0) {
       window.history.go(-window.history.state.currentStepIndex);
