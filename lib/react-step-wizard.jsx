@@ -183,6 +183,10 @@ var StepWizard = React.createClass({
   },
 
   moveToPage: function(stepIndex) {
+    if(this.state.currentStepIndex === stepIndex) {
+      return;
+    }
+
     var minIndex = 0;
     var maxIndex = React.Children.count(this.props.children) - 1;
 
