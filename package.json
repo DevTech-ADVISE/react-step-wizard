@@ -1,6 +1,6 @@
 {
   "name": "react-step-wizard",
-  "version": "2.0",
+  "version": "2.0.0",
   "description": "Paginated step wizard",
   "scripts": {
     "test": "eslint lib/ spec/ && ./node_modules/karma/bin/karma start karma.conf.js",
@@ -24,15 +24,15 @@
     "url": "https://github.com/BI/react-step-wizard/issues"
   },
   "homepage": "https://github.com/BI/react-step-wizard",
-  "dependencies": {
-    "babel-runtime": "~6.9.0",
-    "classnames": "^2.2.5",
-    "react": "^15.0.2",
-    "react-dom": "^15.0.2",
-    "react-event-listener": "0.2.1",
-    "react-pill-selector": "git://github.com/BI/react-pill-selector"
+  "peerDependencies": {
+    "react": "^15.0.2"
   },
   "devDependencies": {
+    "classnames": "^2.2.5",    
+    "react-event-listener": "0.2.1",
+    "react-pill-selector": "git://github.com/BI/react-pill-selector",
+    "react": "^15.0.2",
+    "react-dom": "^15.0.2",
     "babel-core": "~6.9.0",
     "babel-eslint": "^6.0.4",
     "babel-loader": "~6.2.4",
@@ -50,6 +50,8 @@
     "karma-webpack": "~1.7.0",
     "node-sass": "^3.7.0",
     "phantomjs-prebuilt": "^2.1.7",
+    "react-addons-test-utils": "^15.0.2",
+    "react-dom": "^15.0.2",
     "sass-loader": "~3.2.0",
     "style-loader": "~0.13.1",
     "webpack": "^1.13.0",
