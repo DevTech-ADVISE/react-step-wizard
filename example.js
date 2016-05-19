@@ -1,5 +1,7 @@
 var React = require('react');
+var ReactDOM = require('react-dom');
 var StepWizard = require('./lib/index.js');
+var Select = require('react-select');
 var Step = StepWizard.Step;
 
 function onNext(id) {
@@ -19,7 +21,7 @@ var App = React.createClass({
   },
 
   onTextChange: function() {
-    var value = this.refs.textInput.getDOMNode().value;
+    var value = this.refs.textInput.value;
     this.setState({hasText: value.length > 0});
   },
 
@@ -37,6 +39,7 @@ var App = React.createClass({
         <Step title="The First" onNext={onNext} onPrevious={onPrevious}>
           <p>This is the first step</p>
           <p>This step is pretty cool, I guess</p>
+          <Select options={[{label: 'one', value: 1}, {label: 'two', value: 2}, {label: 'three', value: 3}]} />
         </Step>
         <Step title="The Second"
           onNext={onNext}
@@ -62,6 +65,6 @@ var App = React.createClass({
   }
 });
 
-React.render(
+ReactDOM.render(
   <App/>,
   document.getElementById('content'));
