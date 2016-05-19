@@ -11,7 +11,7 @@ module.exports = {
     path: path.join(__dirname),
     filename: 'react-step-wizard.js',
     libraryTarget: 'umd',
-    library: 'ReactStepWizard'
+    library: 'ReactPillSelector'
   },
 
   module: {
@@ -23,14 +23,11 @@ module.exports = {
           'includePaths[]=' + (path.resolve(__dirname, './node_modules'))
       },
       {
-        test: /(\.js)|(\.jsx)$/,
+        test: /\.js$/,
         exclude: /node_modules/,
         loader: 'babel-loader',
-        query: {
-          optional: ['runtime'],
-          stage: 0
-        }
-      }
+        query: {presets:['react']},
+      },
     ]
   }
 };

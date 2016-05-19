@@ -1,8 +1,8 @@
 var React = require('react');
-var Step = require('./step.jsx');
-var NavigationButton = require('./components/navigationButton.jsx');
-var NavigationBeads = require('./components/navigationBeads.jsx');
-var SlideReel = require('./components/slideReel.jsx');
+var Step = require('./step');
+var NavigationButton = require('./components/navigationButton');
+var NavigationBeads = require('./components/navigationBeads');
+var SlideReel = require('./components/slideReel');
 var classNames = require('classnames');
 
 var EventsMixin = require('react-event-listener');
