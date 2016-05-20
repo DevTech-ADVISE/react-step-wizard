@@ -1,12 +1,13 @@
-import React from 'react/addons';
-import StepWizard from '../lib/react-step-wizard.jsx';
+var React = require('react');
+var StepWizard = require('../dist/react-step-wizard');
 var Step = StepWizard.Step;
+var TestUtils = require('react-addons-test-utils');
 
 describe('ReactStepWizard', function() {
   var component;
 
   beforeEach(function() {
-    component = React.addons.TestUtils.renderIntoDocument(
+    component = TestUtils.renderIntoDocument(
       <StepWizard>
         <Step title="Step 1">
           <p className="stepContent">Step 1</p>
@@ -19,6 +20,7 @@ describe('ReactStepWizard', function() {
   });
 
   it('should render', function() {
-    expect(component.getDOMNode().className).toEqual('sw-container');
+    var domComponent = TestUtils.findRenderedDOMComponentWithClass(component, 'sw-container');
+    expect(domComponent.className).toEqual('sw-container');
   });
 });
