@@ -3,8 +3,8 @@
   "version": "2.0.0",
   "description": "Paginated step wizard",
   "scripts": {
-    "test": "eslint lib/ spec/ && ./node_modules/karma/bin/karma start karma.conf.js",
-    "watch-test": "./node_modules/karma/bin/karma start karma.conf.js --auto-watch --no-single-run",
+    "test": "eslint lib/ spec/ && karma start karma.conf.js",
+    "watch-test": "karma start karma.conf.js --auto-watch --no-single-run",
     "build": "webpack -p",
     "dev": "webpack-dev-server --inline --hot --config webpack.demo.config.js"
   },
@@ -24,13 +24,15 @@
     "url": "https://github.com/BI/react-step-wizard/issues"
   },
   "homepage": "https://github.com/BI/react-step-wizard",
+  "dependencies": {
+    "classnames": "^2.2.5",
+    "react-pill-selector": "git://github.com/BI/react-pill-selector",
+    "react-event-listener": "0.2.1"
+  },
   "peerDependencies": {
     "react": "^15.1.0"
   },
   "devDependencies": {
-    "classnames": "^2.2.5",    
-    "react-event-listener": "0.2.1",
-    "react-pill-selector": "git://github.com/BI/react-pill-selector",
     "react": "^15.1.0",
     "react-dom": "^15.1.0",
     "babel-core": "~6.9.0",
