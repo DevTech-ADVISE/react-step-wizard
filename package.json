@@ -1,6 +1,6 @@
 {
   "name": "react-step-wizard",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "description": "Paginated step wizard",
   "scripts": {
     "test": "eslint lib/ spec/ && karma start karma.conf.js",
@@ -8,7 +8,7 @@
     "build": "webpack -p",
     "dev": "webpack-dev-server --inline --hot --config webpack.demo.config.js"
   },
-  "main": "./lib/index.js",
+  "main": "./dist/react-step-wizard.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/BI/react-step-wizard.git"
