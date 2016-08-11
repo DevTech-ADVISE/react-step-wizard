@@ -5,7 +5,7 @@ var NavigationBeads = require('./components/navigationBeads');
 var SlideReel = require('./components/slideReel');
 var classNames = require('classnames');
 
-var EventsMixin = require('react-event-listener');
+var EventListener = require('react-event-listener').default;
 
 require('./react-step-wizard.scss');
 
@@ -13,14 +13,6 @@ require('./react-step-wizard.scss');
 var StepWizard = React.createClass({
   statics: {
     Step: Step,
-  },
-
-  mixins: [EventsMixin],
-
-  listeners: {
-    window: {
-      popstate: 'navigateBack'
-    }
   },
 
   getInitialState: function() {
@@ -44,10 +36,12 @@ var StepWizard = React.createClass({
   },
 
   componentWillMount: function() {
+    console.log('mount ')
     this.validateChildren();
   },
 
   componentDidMount: function() {
+    // window.addEventListener('popstate', this.navigateBack.bind(this))
     this.onMountHistoryFix();
   },
 
@@ -74,11 +68,11 @@ var StepWizard = React.createClass({
     if(!event || !event.state) {
       return;
     }
-    
+
     if(this.state.currentStepIndex === event.state.currentStepIndex) {
       return;
     }
-    
+
     this.moveToPage(event.state.currentStepIndex);
   },
 
@@ -98,7 +92,7 @@ var StepWizard = React.createClass({
     if(index <= window.history.state.currentStepIndex) {
       return;
     }
-    
+
     window.history.pushState({currentStepIndex: index}, 'Step ' + index);
   },
 
@@ -139,7 +133,7 @@ var StepWizard = React.createClass({
     var stepIndex = this.state.currentStepIndex;
 
     stepIndex = Math.max(stepIndex - 1, 0);
-    
+
     this.moveToPage(stepIndex);
   },
 
@@ -233,7 +227,7 @@ var StepWizard = React.createClass({
 
     return (
       <NavigationBeads
-        stepData={childrenData} 
+        stepData={childrenData}
         selectedIndex={this.state.currentStepIndex}
         onClick={this.moveToPage}/>
     );
@@ -295,7 +289,6 @@ var StepWizard = React.createClass({
       }
       else
         prevButton = this.makeNavButton(prevStepData, this.onClickPrev, isActive, "sw-button-full");
-      
     } else {
       prevButton = this.makeNavButton(prevStepData, this.onClickPrev, isActive, "sw-button-left");
       nextButton = this.makeNavButton(nextStepData, this.onClickNext, isActive, "sw-button-right");
@@ -349,6 +342,7 @@ var StepWizard = React.createClass({
             {navigation}
           </div>
         </div>
+        <EventListener target={window} onPopstate={this.navigateBack} />
       </div>
     );
   },

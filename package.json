@@ -1,6 +1,6 @@
 {
   "name": "react-step-wizard",
-  "version": "2.0.2",
+  "version": "2.0.3",
   "description": "Paginated step wizard",
   "scripts": {
     "test": "eslint lib/ spec/ && karma start karma.conf.js",
