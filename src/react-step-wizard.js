@@ -36,7 +36,6 @@ var StepWizard = React.createClass({
   },
 
   componentWillMount: function() {
-    console.log('mount ')
     this.validateChildren();
   },
 
