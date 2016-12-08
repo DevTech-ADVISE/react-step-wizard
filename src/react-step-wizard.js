@@ -23,12 +23,17 @@ var StepWizard = React.createClass({
 
   getDefaultProps: function() {
     return {
-      loopBeginning: true
+      loopBeginning: true,
+      loopBeginningIsValid: true
     };
   },
 
   propTypes: {
-    loopBeginning: React.PropTypes.bool
+    loopBeginning: React.PropTypes.bool,
+    onLoopBeginning: React.PropTypes.func,
+    loopBeginningTitle: React.PropTypes.string,
+    loopBeginningDescription: React.PropTypes.string,
+    loopBeginningIsValid: React.PropTypes.bool
   },
 
   consts: {
@@ -193,12 +198,26 @@ var StepWizard = React.createClass({
 
     var currentIndex = this.state.currentStepIndex;
 
+    // Furthest Index that can be stepped to forward
+    // For going backwards we can always go back any distance unless looping back from the last step to the first step
     var furthestIndex = this.calculateFurthestIndex();
-    if(furthestIndex < stepIndex) {
+    if(furthestIndex < stepIndex && !this.isLoopingBack(currentIndex, stepIndex)) {
       stepIndex = furthestIndex;
     }
 
-    this.executeStepCallbacks(this.state.currentStepIndex, stepIndex);
+    // If moving from the last step to the beginning, execute the special onLoopBeginning callback
+    if(this.state.currentStepIndex === maxIndex && stepIndex === minIndex && this.props.loopBeginning && this.props.onLoopBeginning) {
+      this.props.onLoopBeginning();
+      
+      // If it is not valid to loop to the beggining step then stay on the last step
+      if(this.props.loopBeginning && !this.props.loopBeginningIsValid && this.isLoopingBack(currentIndex, stepIndex)) {
+        stepIndex = maxIndex;
+      }
+    }
+    // Otherwise execute the next or previous callbacks in succession, from the start step to the desired end step
+    else {
+      this.executeStepCallbacks(this.state.currentStepIndex, stepIndex);
+    }
 
     if(window.history.pushState) {
       var direction = stepIndex - window.history.state.currentStepIndex;
@@ -209,6 +228,10 @@ var StepWizard = React.createClass({
     }
 
     this.setState({currentStepIndex: stepIndex});
+  },
+
+  isLoopingBack: function(currentStep, destinationStep) {
+    return (currentStep === React.Children.count(this.props.children) - 1 && destinationStep === 0)
   },
 
   getStepData: function(step, index) {
@@ -274,6 +297,12 @@ var StepWizard = React.createClass({
     var beginningStepData = this.getStepDataAt(0);
     var prevStepData = this.getStepDataAt(index - 1);
     var nextStepData = this.getStepDataAt(index + 1);
+    var loopBeginningStepData = {
+      title: this.props.loopBeginningTitle || beginningStepData.title,
+      description: this.props.loopBeginningDescription || beginningStepData.description,
+      index: 0,
+      isUnreachable: false
+    }
     var isActive = currentIndex === index;
 
     var prevButton = null;
@@ -284,7 +313,7 @@ var StepWizard = React.createClass({
     } else if(nextStepData === null) {
       if(this.props.loopBeginning){
         prevButton = this.makeNavButton(prevStepData, this.onClickPrev, isActive, "sw-button-left");
-        nextButton = this.makeNavButton(beginningStepData, this.onClickNext, isActive, "sw-button-right");
+        nextButton = this.makeNavButton(loopBeginningStepData, this.onClickNext, isActive, "sw-button-right");
       }
       else
         prevButton = this.makeNavButton(prevStepData, this.onClickPrev, isActive, "sw-button-full");
