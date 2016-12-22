@@ -151,7 +151,7 @@ var StepWizard = React.createClass({
     this.moveToPage(stepIndex);
   },
 
-  executeStepCallbacks: function(start, end, calledFromBead) {
+  executeStepCallbacks: function(start, end) {
     //I hate javascript scoping warnings
     var i, child;
 
@@ -190,7 +190,7 @@ var StepWizard = React.createClass({
     return i;
   },
 
-  moveToPage: function(stepIndex, calledFromBead) {
+  moveToPage: function(stepIndex) {
     if(this.state.currentStepIndex === stepIndex) {
       return;
     }
@@ -215,7 +215,7 @@ var StepWizard = React.createClass({
       stepIndex = furthestIndex;
     }
 
-    this.executeStepCallbacks(this.state.currentStepIndex, stepIndex, calledFromBead);
+    this.executeStepCallbacks(this.state.currentStepIndex, stepIndex);
 
     if(window.history.pushState) {
       var direction = stepIndex - window.history.state.currentStepIndex;
@@ -245,12 +245,8 @@ var StepWizard = React.createClass({
       <NavigationBeads
         stepData={childrenData}
         selectedIndex={this.state.currentStepIndex}
-        onClick={this.moveToPageFromBead}/>
+        onClick={this.moveToPage}/>
     );
-  },
-
-  moveToPageFromBead: function(stepIndex) {
-    this.moveToPage(stepIndex, true)
   },
 
   getStepDataAt: function(index) {
