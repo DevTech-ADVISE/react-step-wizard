@@ -1,6 +1,6 @@
 var React = require('react');
 var ReactDOM = require('react-dom');
-var StepWizard = require('./dist/react-step-wizard.js');
+var StepWizard = require('./src/react-step-wizard.js');
 var Step = StepWizard.Step;
 
 function onNext(id) {

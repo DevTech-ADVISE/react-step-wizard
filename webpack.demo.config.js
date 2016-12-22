@@ -11,7 +11,7 @@ module.exports = {
     path: path.join(__dirname),
     filename: 'react-step-wizard.js',
     libraryTarget: 'umd',
-    library: 'ReactPillSelector'
+    library: 'ReactStepWizard'
   },
 
   module: {
