@@ -24,8 +24,7 @@ var StepWizard = React.createClass({
   getDefaultProps: function() {
     return {
       loopBeginning: true,
-      loopBeginningIsValid: true,
-      allowLoopBeginningFromBeads: true
+      loopBeginningIsValid: true
     };
   },
 
@@ -34,8 +33,7 @@ var StepWizard = React.createClass({
     onLoopBeginning: React.PropTypes.func,
     loopBeginningTitle: React.PropTypes.string,
     loopBeginningDescription: React.PropTypes.string,
-    loopBeginningIsValid: React.PropTypes.bool,
-    allowLoopBeginningFromBeads: React.PropTypes.bool
+    loopBeginningIsValid: React.PropTypes.bool
   },
 
   consts: {
@@ -127,7 +125,17 @@ var StepWizard = React.createClass({
     var maxIndex = React.Children.count(this.props.children) - 1;
 
     if(stepIndex === maxIndex && this.props.loopBeginning) {
-      stepIndex = 0;
+      if(this.props.onLoopBeginning) {
+        this.props.onLoopBeginning();
+      }
+      // If it is not valid to loop to the beggining step then stay on the last step
+      if(!this.props.loopBeginningIsValid) {
+        stepIndex = maxIndex;
+      }
+      else {
+        stepIndex = 0;
+      }
+      
     } else {
       stepIndex = Math.min(stepIndex + 1, maxIndex);
     }
@@ -143,7 +151,7 @@ var StepWizard = React.createClass({
     this.moveToPage(stepIndex);
   },
 
-  executeStepCallbacks: function(start, end) {
+  executeStepCallbacks: function(start, end, calledFromBead) {
     //I hate javascript scoping warnings
     var i, child;
 
@@ -201,26 +209,13 @@ var StepWizard = React.createClass({
     var currentIndex = this.state.currentStepIndex;
 
     // Furthest Index that can be stepped to forward
-    // For going backwards we can always go back any distance unless looping back from the last step to the first step
-    // Also allow looping to beginning if the beads are allowed to loop to beginning
+    // For going backwards we can always go back any distance
     var furthestIndex = this.calculateFurthestIndex();
-    if(furthestIndex < stepIndex && ((this.props.allowLoopBeginningFromBeads && calledFromBead) || !this.isLoopingBack(currentIndex, stepIndex))) {
+    if(furthestIndex < stepIndex) {
       stepIndex = furthestIndex;
     }
 
-    // If moving from the last step to the beginning(and not using the beads), execute the special onLoopBeginning callback
-    if(!(this.props.allowLoopBeginningFromBeads && calledFromBead) && this.state.currentStepIndex === maxIndex && stepIndex === minIndex && this.props.loopBeginning && this.props.onLoopBeginning) {
-      this.props.onLoopBeginning();
-      
-      // If it is not valid to loop to the beggining step then stay on the last step
-      if(this.props.loopBeginning && !this.props.loopBeginningIsValid && this.isLoopingBack(currentIndex, stepIndex)) {
-        stepIndex = maxIndex;
-      }
-    }
-    // Otherwise execute the next or previous callbacks in succession, from the start step to the desired end step
-    else {
-      this.executeStepCallbacks(this.state.currentStepIndex, stepIndex);
-    }
+    this.executeStepCallbacks(this.state.currentStepIndex, stepIndex, calledFromBead);
 
     if(window.history.pushState) {
       var direction = stepIndex - window.history.state.currentStepIndex;
@@ -231,10 +226,6 @@ var StepWizard = React.createClass({
     }
 
     this.setState({currentStepIndex: stepIndex});
-  },
-
-  isLoopingBack: function(currentStep, destinationStep) {
-    return (currentStep === React.Children.count(this.props.children) - 1 && destinationStep === 0)
   },
 
   getStepData: function(step, index) {
