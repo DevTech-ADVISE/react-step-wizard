@@ -1,7 +1,9 @@
 var React = require('react');
+var createReactClass = require('create-react-class');
+var PropTypes = require('prop-types');
 var classNames = require('classnames');
 
-var Step = React.createClass({
+var Step = createReactClass({
   getInitialState: function() {
     return {};
   },
@@ -18,13 +20,13 @@ var Step = React.createClass({
   },
 
   propTypes: {
-    title: React.PropTypes.string.isRequired,
-    description: React.PropTypes.string,
-    isActive: React.PropTypes.bool,
-    onNext: React.PropTypes.func,
-    onPrevious: React.PropTypes.func,
-    onError: React.PropTypes.func,
-    isValid: React.PropTypes.bool,
+    title: PropTypes.string.isRequired,
+    description: PropTypes.string,
+    isActive: PropTypes.bool,
+    onNext: PropTypes.func,
+    onPrevious: PropTypes.func,
+    onError: PropTypes.func,
+    isValid: PropTypes.bool,
   },
 
   render: function () {

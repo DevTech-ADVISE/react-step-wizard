@@ -1,16 +1,18 @@
 var React = require('react');
+var PropTypes = require('prop-types');
+var createReactClass = require('create-react-class');
 var PillSelector = require('react-pill-selector');
 var classNames = require('classnames');
 
-var NavigationBeads = React.createClass({
+var NavigationBeads = createReactClass({
   getInitialState: function() {
     return {};
   },
 
   propTypes: {
-    stepData: React.PropTypes.array.isRequired,
-    onClick: React.PropTypes.func.isRequired,
-    selectedIndex: React.PropTypes.number.isRequired,
+    stepData: PropTypes.array.isRequired,
+    onClick: PropTypes.func.isRequired,
+    selectedIndex: PropTypes.number.isRequired,
   },
 
   makeBead: function(step, index) {

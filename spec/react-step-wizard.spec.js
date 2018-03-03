@@ -1,7 +1,7 @@
 var React = require('react');
 var StepWizard = require('../src/react-step-wizard');
 var Step = StepWizard.Step;
-var TestUtils = require('react-addons-test-utils');
+var TestUtils = require('react-dom/test-utils');
 
 describe('ReactStepWizard', function() {
   var component;

@@ -1,4 +1,6 @@
 var React = require('react');
+var createReactClass = require('create-react-class');
+var PropTypes = require('prop-types');
 var Step = require('./step');
 var NavigationButton = require('./components/navigationButton');
 var NavigationBeads = require('./components/navigationBeads');
@@ -10,7 +12,7 @@ var EventListener = require('react-event-listener').default;
 require('./react-step-wizard.scss');
 
 
-var StepWizard = React.createClass({
+var StepWizard = createReactClass({
   statics: {
     Step: Step,
   },
@@ -29,11 +31,11 @@ var StepWizard = React.createClass({
   },
 
   propTypes: {
-    loopBeginning: React.PropTypes.bool,
-    onLoopBeginning: React.PropTypes.func,
-    loopBeginningTitle: React.PropTypes.string,
-    loopBeginningDescription: React.PropTypes.string,
-    loopBeginningIsValid: React.PropTypes.bool
+    loopBeginning: PropTypes.bool,
+    onLoopBeginning: PropTypes.func,
+    loopBeginningTitle: PropTypes.string,
+    loopBeginningDescription: PropTypes.string,
+    loopBeginningIsValid: PropTypes.bool
   },
 
   consts: {

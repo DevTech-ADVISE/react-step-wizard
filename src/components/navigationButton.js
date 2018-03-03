@@ -1,11 +1,13 @@
 var React = require('react');
+var PropTypes = require('prop-types');
+var createReactClass = require('create-react-class');
 var classNames = require('classnames');
 
-var NavigationButton = React.createClass({
+var NavigationButton = createReactClass({
   propTypes: {
-    stepData: React.PropTypes.object.isRequired,
-    onClick: React.PropTypes.func.isRequired,
-    isShown: React.PropTypes.bool.isRequired,
+    stepData: PropTypes.object.isRequired,
+    onClick: PropTypes.func.isRequired,
+    isShown: PropTypes.bool.isRequired,
   },
 
   render: function () {
