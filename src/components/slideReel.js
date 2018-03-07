@@ -1,8 +1,9 @@
 var React = require('react');
-
+var PropTypes = require('prop-types');
+var createReactClass = require('create-react-class');
 require('../slideReelStyles.scss');
 
-var SlideReel = React.createClass({
+var SlideReel = createReactClass({
   getInitialState: function() {
     return {
 
@@ -10,7 +11,7 @@ var SlideReel = React.createClass({
   },
 
   propTypes: {
-    currentIndex: React.PropTypes.number.isRequired,
+    currentIndex: PropTypes.number.isRequired,
   },
 
   getSlides: function() {

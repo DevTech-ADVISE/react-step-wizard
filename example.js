@@ -1,5 +1,6 @@
 var React = require('react');
 var ReactDOM = require('react-dom');
+var createReactClass = require('create-react-class');
 var StepWizard = require('./src/react-step-wizard.js');
 var Step = StepWizard.Step;
 
@@ -11,7 +12,7 @@ function onPrevious(id) {
   console.log((id - 1) + " <- " + id);
 }
 
-var App = React.createClass({
+var App = createReactClass({
   getInitialState: function() {
     return {
       isButtonPressed: false,

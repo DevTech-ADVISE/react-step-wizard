@@ -26,19 +26,18 @@
   "homepage": "https://github.com/BI/react-step-wizard",
   "dependencies": {
     "classnames": "^2.2.5",
-    "react-pill-selector": "git://github.com/BI/react-pill-selector",
-    "react-event-listener": "0.2.1"
+    "react-event-listener": "^0.5.3",
+    "react-pill-selector": "git://github.com/BI/react-pill-selector"
   },
   "peerDependencies": {
-    "react": "^15.1.0"
+    "react": ">=15.1.0"
   },
   "devDependencies": {
-    "react": "^15.1.0",
-    "react-dom": "^15.1.0",
     "babel-core": "~6.9.0",
     "babel-eslint": "^6.0.4",
     "babel-loader": "~6.2.4",
     "babel-preset-react": "^6.5.0",
+    "create-react-class": "^15.6.3",
     "css-loader": "~0.23.1",
     "es5-shim": "~4.5.8",
     "eslint": "^2.10.2",
@@ -52,7 +51,9 @@
     "karma-webpack": "~1.7.0",
     "node-sass": "^3.7.0",
     "phantomjs-prebuilt": "^2.1.7",
-    "react-addons-test-utils": "^15.1.0",
+    "prop-types": "^15.6.1",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0",
     "sass-loader": "~3.2.0",
     "style-loader": "~0.13.1",
     "webpack": "^1.13.1",
