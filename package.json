@@ -11,7 +11,7 @@
   "main": "./dist/react-step-wizard.js",
   "repository": {
     "type": "git",
-    "url": "https://github.com/BI/react-step-wizard.git"
+    "url": "git+ssh://git@github.com:DevTech-ADVISE/react-step-wizard.git"
   },
   "author": "",
   "keywords": [
@@ -21,13 +21,13 @@
   ],
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/BI/react-step-wizard/issues"
+    "url": "https://github.com/DevTech-ADVISE/react-step-wizard/issues"
   },
-  "homepage": "https://github.com/BI/react-step-wizard",
+  "homepage": "https://github.com/DevTech-ADVISE/react-step-wizard",
   "dependencies": {
     "classnames": "^2.2.5",
     "react-event-listener": "^0.5.3",
-    "react-pill-selector": "git://github.com/BI/react-pill-selector"
+    "react-pill-selector": "git+ssh://git@github.com:DevTech-ADVISE/react-pill-selector"
   },
   "peerDependencies": {
     "react": ">=15.1.0"
